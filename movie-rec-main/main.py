@@ -21,8 +21,13 @@ TMDB_BASE = "https://api.themoviedb.org/3"
 TMDB_IMG_500 = "https://image.tmdb.org/t/p/w500"
 
 if not TMDB_API_KEY:
-    # Don't crash import-time in production if you prefer; but for you better fail early:
-    raise RuntimeError("TMDB_API_KEY missing. Put it in .env as TMDB_API_KEY=xxxx")
+    # On Render, the user sets this in the dashboard.
+    # We want a clear error if it's missing.
+    raise RuntimeError(
+        "TMDB_API_KEY is NOT set. "
+        "If you are on Render, add it in 'Environment Variables'. "
+        "If local, add it to your .env file."
+    )
 
 
 # =========================
